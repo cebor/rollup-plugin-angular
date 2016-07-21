@@ -13,7 +13,7 @@
     "template",
     "styles",
     "inliner",
-    "rollup"
+    "rollup-plugin"
   ],
   "files": [
     "dist"
