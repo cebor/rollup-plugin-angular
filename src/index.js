@@ -13,7 +13,6 @@ function insertText(str, dir) {
     var text = fs.readFileSync(path.join(dir, url)).toString();
     return '`' + text + '`';
   });
-  console.log(str);
   return str;
 }
 
