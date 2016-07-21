@@ -3,10 +3,10 @@ import path from 'path';
 
 import { createFilter } from 'rollup-pluginutils';
 
-const componentRegex = /^\s*@(Component)\({([\s\S]*)}\)\s*$/gm;
+const componentRegex = /@(Component)\({([\s\S]*)}\)$/gm;
 const templateUrlRegex = /templateUrl\s*:(.*)/g;
 const styleUrlsRegex = /styleUrls\s*:(\s*\[[\s\S]*?\])/g;
-const stringRegex = /(['"])(.*?)\1/g;
+const stringRegex = /(['"])((?:[^\\]\\\1|.)*?)\1/g;
 
 function insertText(str, dir) {
   str = str.replace(stringRegex, function (match, quote, url) {
