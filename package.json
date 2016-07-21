@@ -14,6 +14,9 @@
     "styles",
     "inliner"
   ],
+  "files": [
+    "dist"
+  ],
   "author": "Felix Itzenplitz",
   "repository": {
     "type": "git",
