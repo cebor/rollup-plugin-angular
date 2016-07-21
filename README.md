@@ -22,7 +22,7 @@ export default {
   plugins: [
     angular(),
     typescript(),
-    alias({ rxjs: __dirname + '/node_modules/rxjs-es' }), // rxjs fix
+    alias({ rxjs: __dirname + '/node_modules/rxjs-es' }), // rxjs fix (npm install rxjs-es)
     nodeResolve({ jsnext: true, main: true })
   ]
 }
