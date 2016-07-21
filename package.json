@@ -1,7 +1,7 @@
 {
   "name": "rollup-plugin-angular",
   "version": "0.1.5",
-  "description": "Angular2 template/style inliner",
+  "description": "Angular2 template and styles inliner",
   "main": "dist/rollup-plugin-angular.js",
   "jsnext:main": "dist/rollup-plugin-angular.es2015.js",
   "scripts": {
@@ -12,7 +12,8 @@
     "angular2",
     "template",
     "styles",
-    "inliner"
+    "inliner",
+    "rollup"
   ],
   "files": [
     "dist"

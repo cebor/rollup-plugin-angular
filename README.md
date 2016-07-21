@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/cebor/rollup-plugin-angular.svg?branch=master)](https://travis-ci.org/cebor/rollup-plugin-angular)
 
 # rollup-plugin-angular
-Angular2 template/style inliner
+Angular2 template and styles inliner
 
 ## Example rollup.config.js
 
