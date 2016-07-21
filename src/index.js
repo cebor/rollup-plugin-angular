@@ -22,7 +22,7 @@ export default function angular (options = {}) {
   return {
     name: 'angular',
     transform(source, map) {
-      if ( !filter( id ) ) return;
+      if (!filter(map)) return;
 
       var dir = path.parse(map).dir;
 
