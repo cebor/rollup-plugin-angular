@@ -3,6 +3,10 @@
 # rollup-plugin-angular
 Angular2 template and styles inliner
 
+```bash
+npm install --save-dev rollup-plugin-angular
+```
+
 ## Example rollup.config.js
 
 ```javascript
