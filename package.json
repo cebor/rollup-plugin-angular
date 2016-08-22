@@ -3,7 +3,7 @@
   "version": "0.2.2",
   "description": "Angular2 template and styles inliner",
   "main": "dist/rollup-plugin-angular.js",
-  "jsnext:main": "dist/rollup-plugin-angular.es2015.js",
+  "jsnext:main": "dist/rollup-plugin-angular.esm.js",
   "scripts": {
     "build": "rollup -c",
     "prepublish": "npm run build"
