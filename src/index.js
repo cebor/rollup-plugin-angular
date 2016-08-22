@@ -38,7 +38,10 @@ export default function angular (options = {}) {
           return '@' + decorator + '({' + metadata + '})';
       });
 
-      return source;
+      return {
+        code: source,
+        map: { mappings: '' }
+      };
     }
   };
 }
