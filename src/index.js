@@ -8,31 +8,33 @@ const templateUrlRegex = /templateUrl\s*:(.*)/g;
 const styleUrlsRegex = /styleUrls\s*:(\s*\[[\s\S]*?\])/g;
 const stringRegex = /(['"])((?:[^\\]\\\1|.)*?)\1/g;
 
-function insertText(str, dir) {
-  str = str.replace(stringRegex, function (match, quote, url) {
-    var text = fs.readFileSync(path.join(dir, url)).toString();
-    return '`' + text + '`';
+function insertText(str, dir, preprocessor = res => res) {
+  return str.replace(stringRegex, function (match, quote, url) {
+    const includePath = path.join(dir, url);
+    const text = fs.readFileSync(includePath).toString();
+    return '`' + preprocessor(text, includePath) + '`';
   });
-  return str;
 }
 
 export default function angular (options = {}) {
-  var filter = createFilter(options.include, options.exclude);
+  options.preprocessors = options.preprocessors || {};
+
+  const filter = createFilter(options.include, options.exclude);
 
   return {
     name: 'angular',
     transform(source, map) {
       if (!filter(map)) return;
 
-      var dir = path.parse(map).dir;
+      const dir = path.parse(map).dir;
 
       source = source.replace(componentRegex, function (match, decorator, metadata) {
         metadata = metadata
           .replace(templateUrlRegex, function (match, url) {
-            return 'template:' + insertText(url, dir);
+            return 'template:' + insertText(url, dir, options.preprocessors.template);
           })
           .replace(styleUrlsRegex, function (match, urls) {
-            return 'styles:' + insertText(urls, dir);
+            return 'styles:' + insertText(urls, dir, options.preprocessors.style);
           });
 
           return '@' + decorator + '({' + metadata + '})';
