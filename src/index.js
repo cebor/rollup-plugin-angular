@@ -21,6 +21,7 @@ export default function angular (options = {}) {
 
   // ignore @angular/** modules
   options.exclude = options.exclude || [];
+  if (typeof options.exclude === 'string' || options.exclude instanceof String) options.exclude = [options.exclude];
   if (options.exclude.indexOf('node_modules/@angular/**') === -1) options.exclude.push('node_modules/@angular/**');
 
   const filter = createFilter(options.include, options.exclude);
