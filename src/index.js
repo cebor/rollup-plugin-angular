@@ -18,10 +18,10 @@ function insertText(str, dir, preprocessor = res => res) {
 
 export default function angular (options = {}) {
   options.preprocessors = options.preprocessors || {};
-  
+
   // regex fix
   if (!Array.isArray(options.exclude)) options.exclude = [];
-  if (!options.exclude.includes('node_modules/@angular/**')) options.exclude.push('node_modules/@angular/**');
+  if (options.exclude.indexOf('node_modules/@angular/**') === -1) options.exclude.push('node_modules/@angular/**');
 
   const filter = createFilter(options.include, options.exclude);
 
