@@ -1,6 +1,6 @@
 {
   "name": "rollup-plugin-angular",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Angular2 template and styles inliner",
   "main": "dist/rollup-plugin-angular.js",
   "jsnext:main": "dist/rollup-plugin-angular.esm.js",
