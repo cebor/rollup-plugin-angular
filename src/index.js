@@ -4,7 +4,7 @@ import path from 'path';
 import MagicString from 'magic-string';
 import { createFilter } from 'rollup-pluginutils';
 
-const componentRegex = /@Component\({([\s\S]*)}\)$/gm;
+const componentRegex = /@Component\(\s?{([\s\S]*)}\s?\)$/gm;
 const templateUrlRegex = /templateUrl\s*:(.*)/g;
 const styleUrlsRegex = /styleUrls\s*:(\s*\[[\s\S]*?\])/g;
 const stringRegex = /(['"])((?:[^\\]\\\1|.)*?)\1/g;
