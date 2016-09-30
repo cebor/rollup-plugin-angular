@@ -39,7 +39,7 @@ export default function angular(options = {}) {
       let match;
       let start, end, replacement;
 
-      while ((match = componentRegex.exec(magicString)) !== null) {
+      while ((match = componentRegex.exec(source)) !== null) {
         start = match.index;
         end = start + match[0].length;
 
