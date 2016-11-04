@@ -4,6 +4,7 @@ import path from 'path';
 import MagicString from 'magic-string';
 import { createFilter } from 'rollup-pluginutils';
 
+const jsCommentsRegex = /\/\*[\s\S]*?\*\/|([^:]|^)\/\/.*$/gm;
 const componentRegex = /@Component\(\s?{([\s\S]*)}\s?\)$/gm;
 const templateUrlRegex = /templateUrl\s*:(.*)/g;
 const styleUrlsRegex = /styleUrls\s*:(\s*\[[\s\S]*?\])/g;
@@ -31,6 +32,8 @@ export default function angular(options = {}) {
     name: 'angular',
     transform(source, map) {
       if (!filter(map)) return;
+
+      source = source.replace(jsCommentsRegex, '');
 
       const magicString = new MagicString(source);
       const dir = path.parse(map).dir;
