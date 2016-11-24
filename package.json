@@ -25,7 +25,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "magic-string": "^0.16.0",
+    "magic-string": "^0.17.0",
     "rollup-pluginutils": "^1.5.1"
   },
   "devDependencies": {
