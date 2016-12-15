@@ -21,7 +21,7 @@
   "author": "Felix Itzenplitz",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cebor/rollup-plugin-angular.git"
+    "url": "https://github.com/partap/rollup-plugin-angular.git"
   },
   "license": "MIT",
   "dependencies": {
