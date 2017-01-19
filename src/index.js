@@ -4,14 +4,18 @@ import path from 'path';
 import MagicString from 'magic-string';
 import { createFilter } from 'rollup-pluginutils';
 
+const moduleIdRegex = /moduleId\s*:(.*)/g;
 const componentRegex = /@Component\(\s?{([\s\S]*)}\s?\)$/gm;
 const templateUrlRegex = /templateUrl\s*:(.*)/g;
 const styleUrlsRegex = /styleUrls\s*:(\s*\[[\s\S]*?\])/g;
 const stringRegex = /(['"])((?:[^\\]\\\1|.)*?)\1/g;
 
-function insertText(str, dir, preprocessor = res => res) {
+function insertText(str, dir, preprocessor = res => res, processFilename = false) {
   return str.replace(stringRegex, function (match, quote, url) {
     const includePath = path.join(dir, url);
+    if (processFilename) {
+      return '`' + preprocessor(includePath) + '`';
+    }
     const text = fs.readFileSync(includePath).toString();
     return '`' + preprocessor(text, includePath) + '`';
   });
@@ -46,11 +50,15 @@ export default function angular(options = {}) {
         replacement = match[0]
           .replace(templateUrlRegex, function (match, url) {
             hasReplacements = true;
-            return 'template:' + insertText(url, dir, options.preprocessors.template);
+            return 'template:' + insertText(url, dir, options.preprocessors.template, options.processFilename);
           })
           .replace(styleUrlsRegex, function (match, urls) {
             hasReplacements = true;
-            return 'styles:' + insertText(urls, dir, options.preprocessors.style);
+            return 'styles:' + insertText(urls, dir, options.preprocessors.style, options.processFilename);
+          })
+          .replace(moduleIdRegex, function (match, moduleId) {
+            hasReplacements = true;
+            return '';
           });
 
         if (hasReplacements) magicString.overwrite(start, end, replacement);
