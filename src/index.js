@@ -8,7 +8,7 @@ const moduleIdRegex = /moduleId\s*:(.*)/g;
 const componentRegex = /@Component\(\s?{([\s\S]*)}\s?\)$/gm;
 const templateUrlRegex = /templateUrl\s*:(.*)/g;
 const styleUrlsRegex = /styleUrls\s*:(\s*\[[\s\S]*?\])/g;
-const stringRegex = /(['"])((?:[^\\]\\\1|.)*?)\1/g;
+const stringRegex = /(['"`])((?:[^\\]\\\1|.)*?)\1/g;
 
 function insertText(str, dir, preprocessor = res => res, processFilename = false) {
   return str.replace(stringRegex, function (match, quote, url) {
