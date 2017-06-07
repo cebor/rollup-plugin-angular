@@ -34,8 +34,11 @@ You may need to do some preprocessing on your templates & styles such as minific
 
 To do this you can pass a preprocessors object as an option, containing a style and/or template preprocessor.
 
+If you are using rollup on a source that has already been transpiled to JavaScript you will also need to set the sourcetype.
+
 ### Signature
 ```typescript
+sourcetype: 'js' //defaults to 'ts'
 preprocessors: {
   template: (source: string, path: string) => string,
   style: (source: string, path: string) => string,

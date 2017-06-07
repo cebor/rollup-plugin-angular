@@ -10,14 +10,15 @@ const templateUrlRegex = /templateUrl\s*:(.*)/g;
 const styleUrlsRegex = /styleUrls\s*:(\s*\[[\s\S]*?\])/g;
 const stringRegex = /(['"])((?:[^\\]\\\1|.)*?)\1/g;
 
-function insertText(str, dir, preprocessor = res => res, processFilename = false) {
+function insertText(str, dir, preprocessor = res => res, processFilename = false, sourceType = 'ts') {
+  let quoteChar = sourceType === 'ts' ? '`' : '"';
   return str.replace(stringRegex, function (match, quote, url) {
     const includePath = path.join(dir, url);
     if (processFilename) {
-      return '`' + preprocessor(includePath) + '`';
+      return quoteChar + preprocessor(includePath) + quoteChar;
     }
     const text = fs.readFileSync(includePath).toString();
-    return '`' + preprocessor(text, includePath) + '`';
+    return quoteChar + preprocessor(text, includePath) + quoteChar;
   });
 }
 
@@ -50,11 +51,11 @@ export default function angular(options = {}) {
         replacement = match[0]
           .replace(templateUrlRegex, function (match, url) {
             hasReplacements = true;
-            return 'template:' + insertText(url, dir, options.preprocessors.template, options.processFilename);
+            return 'template:' + insertText(url, dir, options.preprocessors.template, options.processFilename, options.sourcetype);
           })
           .replace(styleUrlsRegex, function (match, urls) {
             hasReplacements = true;
-            return 'styles:' + insertText(urls, dir, options.preprocessors.style, options.processFilename);
+            return 'styles:' + insertText(urls, dir, options.preprocessors.style, options.processFilename, options.sourcetype);
           })
           .replace(moduleIdRegex, function (match, moduleId) {
             hasReplacements = true;
