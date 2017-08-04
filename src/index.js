@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import decomment from 'decomment';
 
 import MagicString from 'magic-string';
 import { createFilter } from 'rollup-pluginutils';
@@ -36,7 +37,7 @@ export default function angular(options = {}) {
     transform(source, map) {
       if (!filter(map)) return;
 
-      const magicString = new MagicString(source);
+      const magicString = new MagicString(decomment(source));
       const dir = path.parse(map).dir;
 
       let hasReplacements = false;
