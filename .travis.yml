@@ -8,3 +8,5 @@ deploy:
   on:
     tags: true
     repo: cebor/rollup-plugin-angular
+addons:
+  chrome: stable
