@@ -9,7 +9,11 @@ deploy:
     tags: true
     repo: cebor/rollup-plugin-angular
 addons:
-  chrome: stable
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
 before_script:
   - "export CHROME_BIN=chromium-browser"
   - "export DISPLAY=:99.0"
