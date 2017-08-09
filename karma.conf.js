@@ -27,6 +27,7 @@ module.exports = function(config) {
     plugins: [
       require('karma-coverage'),
       require('karma-chrome-launcher'),
+      require('karma-firefox-launcher'),
       require('karma-rollup-preprocessor'),
       require('karma-jasmine')
     ],
@@ -111,14 +112,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
-
-    customLaunchers: {
-      Chrome_travis_ci: {
-        base: 'Chrome',
-        flags: ['--no-sandbox']
-      }
-    },
+    browsers: ['Firefox'],
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
