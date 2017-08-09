@@ -7,10 +7,11 @@
   "scripts": {
     "build": "rollup -c",
     "prepublish": "npm run build",
-    "test": "npm run build && npm run mocha:test && ./node_modules/karma/bin/karma start karma.conf.js",
+    "test": "npm run build && npm run mocha:test && npm run karma:test",
+    "karma:test": "./node_modules/karma/bin/karma start karma.conf.js",
     "mocha:js": "mocha test/mochajs/index.js --compilers js:buble/register --compilers js:babel-register; exit 0",
     "mocha:ts": "mocha test/mochats/index.ts --compilers ts:ts-node/register --timeout 2000; exit 0",
-    "mocha:test": "npm run build && npm run mocha:js && npm run mocha:ts"
+    "mocha:test": "npm run build && npm run mocha:js && npm run mocha:ts; exit 0;"
   },
   "keywords": [
     "angular2",
