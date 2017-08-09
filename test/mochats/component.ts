@@ -1,8 +1,9 @@
+
 import { Component } from '@angular/core';
 /**
  * @Component({
  *  selector: 'example',
- *  templateUrl: './do-not-load-this-component.html'
+ *  templateUrl: './example-component.html'
  * })
  * export class ExampleComponent {}
  * @export
@@ -10,8 +11,8 @@ import { Component } from '@angular/core';
  * @implements {AfterViewChecked}
  */
 @Component({
-  selector: 'test',
-  templateUrl: `./test.component.html`
+  selector: 'component',
+  templateUrl: `./component.html`
 })
 export class TestComponent {
   constructor() {}
