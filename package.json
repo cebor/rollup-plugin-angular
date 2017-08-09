@@ -7,9 +7,10 @@
   "scripts": {
     "build": "rollup -c",
     "prepublish": "npm run build",
-    "test": "npm run build && ./node_modules/karma/bin/karma start karma.conf.js",
-    "mocha-js": "npm run build && mocha test/mochajs/index.js --compilers js:buble/register --compilers js:babel-register",
-    "mocha-ts": "npm run build && mocha test/mochats/index.ts --compilers ts:ts-node/register --timeout 2000; exit 0"
+    "test": "npm run build && npm run mocha:test && ./node_modules/karma/bin/karma start karma.conf.js",
+    "mocha:js": "mocha test/mochajs/index.js --compilers js:buble/register --compilers js:babel-register; exit 0",
+    "mocha:ts": "mocha test/mochats/index.ts --compilers ts:ts-node/register --timeout 2000; exit 0",
+    "mocha:test": "npm run build && npm run mocha:js && npm run mocha:ts"
   },
   "keywords": [
     "angular2",
@@ -44,11 +45,13 @@
     "@types/node": "^8.0.19",
     "babel-register": "^6.24.1",
     "chai": "^4.1.1",
+    "colors": "^1.1.2",
     "jasmine": "^2.7.0",
     "jasmine-core": "^2.7.0",
     "karma": "^1.7.0",
     "karma-chrome-launcher": "^2.2.0",
     "karma-coverage": "^1.1.1",
+    "karma-firefox-launcher": "^1.0.1",
     "karma-jasmine": "^1.1.0",
     "karma-rollup-preprocessor": "^4.0.2",
     "mocha": "^3.5.0",
