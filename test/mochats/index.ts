@@ -5,10 +5,14 @@ import * as nodeResolve from 'rollup-plugin-node-resolve';
 import * as typescript from 'rollup-plugin-typescript';
 import { expect, assert } from 'chai';
 import * as angular from '../../dist/rollup-plugin-angular.js';
+import * as colors from 'colors';
 
 process.chdir('test');
 
 describe('rollup-plugin-angular', () => {
+  console.info(`-------------------`);
+  console.info(colors.blue(`start test mocha:ts`));
+  console.info(`-------------------`);
   it('should not have <example-component-html></example-component-html>', () => {
     return rollup({
         entry: 'mochats/test.component.ts',
