@@ -4,7 +4,11 @@ deploy:
   provider: npm
   email: felix@stkn.org
   api_key:
-    secure: XqW2S2mkTS9oP77HjO1Ui9TgXI1s4I+1YPrG7gPG1o6qBU59ZRGEEidDgkFi//m7sDF9Oo+Xp5r1EC9Ij3ztQ+1kMDwz9aa2Bt2uOanqRpKy9AUKo6Y66exolZ8WZVnVfGaa2eKo5UAzrg+7EDYFZpDhZyWeYYd9PWiJfUjOArup4bNEpQmPz9RyTFGe0P6rj0dAeSgmBaaMadROAr2c7G09CHGH7CctTXH5NTz6HPBcsqxMOqQ2vMJwkid+cdJWWnL8zGUsmGvuGI/4VVnVo+n9gydtz3wvYHQjLVUHCz3yMd5A1YMWxdBe017jELluVm6Ko1imdv1qclZbpOb3qSCDqkfyxvrCF5WudVT4thggS6PTIOpzwuhm71/kX/aoKehDwm20oNsLMY5Ig+z3TpUC7rBduCYaGXfNIuSOHXMJtSTWhbTWvxpTdIKfyYZt5UcgChyrx8gjQ1yJyGpqq/kPOynJ9mu581/nwuKNl+Axx5+tHKD+fB27hxFwYJK+jE/23nwkPXsxsk91cuZvlYiFY7n3jFbtQQ9LoJb88Af0fkiQQ4P9ja5V3TdSP3j1XYuXvt1/P/23o5VnVLLriesQMUb3l9izgce11d5lBie8pwWa9KxiE4zJ6YNg4V+rdiknkEq7FgqqJmyqnjN10Onkoe07y00QlJsj95VkpMk=
+    secure: bU+7l8jBtPV7LAxN7NimbrSIEM+GvDU5CpVbq4T+ix3wzkYdaCaOLS60kJNoS/cB5sAAENZZRkyBLuwDJZ/u38IrVc3k2p6U/eu7i+5ErvHB6v6z4yB6yOiFqYbEloPWpvROX3KN2AQkot8TNl81HO2cTG0vHEipusXh8g/xIG/62gJvHXosDEySd7Wfmy0cDijZUD7UDbTm+INioToHvI5UdSq35JdBFblALP6eRBqE+WtW12Nql2/oDTtWblBLopFhXqptpJINAYZL3YclPRmGycfvhqN2ygjdEo6bltvdphTJU9QTua2XFrwer6dJI8bKDt4cmJUsTEbAVRMhjCWW4zGiRQx9C4GnhccH8+0mupvLdrkPEgvcwCUaHDyDAJ++UgC/b9PglrZUKP/ol6KdN2fCBmwf5zrNjygy0OYWPsiUrd1PiqDF3KkLMbOoymEUI7nNQ6oTJDu8L43GSuaysKUYUOafiPqoSFes144BZ/nlRpIiDjmdo1AhuzFDry9kuQYeHk6frEswY9aQ43NfDtzHygs35FPZ7MGtpNWbFTnp72MnJ6MdDE38zz8YparrkH/sX+JBHWVsmE5aYwuphtL4waeTqZRZq1S//dZLp7WSz2jd43h13A/h3ggkuIp4f8sw8FQtqmWZwehFnnYHw7+KR4+u2uuTrwtMaf4=
   on:
     tags: true
     repo: cebor/rollup-plugin-angular
+before_script:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - sleep 3 # give xvfb some time to start

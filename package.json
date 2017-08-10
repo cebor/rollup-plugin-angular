@@ -1,12 +1,17 @@
 {
   "name": "rollup-plugin-angular",
-  "version": "0.4.4",
+  "version": "0.4.11",
   "description": "Angular2 template and styles inliner",
   "main": "dist/rollup-plugin-angular.js",
   "module": "dist/rollup-plugin-angular.esm.js",
   "scripts": {
     "build": "rollup -c",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "test": "npm run build && npm run mocha:test && npm run karma:test",
+    "karma:test": "./node_modules/karma/bin/karma start karma.conf.js",
+    "mocha:js": "mocha test/mochajs/index.js --compilers js:buble/register --compilers js:babel-register; exit 0",
+    "mocha:ts": "mocha test/mochats/index.ts --compilers ts:ts-node/register --timeout 2000; exit 0",
+    "mocha:test": "npm run build && npm run mocha:js && npm run mocha:ts; exit 0;"
   },
   "keywords": [
     "angular2",
@@ -25,11 +30,41 @@
   },
   "license": "MIT",
   "dependencies": {
-    "magic-string": "^0.19.0",
+    "magic-string": "^0.22.4",
     "rollup-pluginutils": "^2.0.1"
   },
   "devDependencies": {
-    "rollup": "^0.41.1",
-    "rollup-plugin-buble": "^0.15.0"
+    "@angular/common": "^4.3.3",
+    "@angular/compiler": "^4.3.3",
+    "@angular/core": "^4.3.3",
+    "@angular/platform-browser": "^4.3.3",
+    "@angular/platform-browser-dynamic": "^4.3.3",
+    "@types/chai": "^4.0.2",
+    "@types/jasmine": "^2.5.53",
+    "@types/karma": "^0.13.36",
+    "@types/mocha": "^2.2.41",
+    "@types/node": "^8.0.19",
+    "babel-register": "^6.24.1",
+    "chai": "^4.1.1",
+    "colors": "^1.1.2",
+    "jasmine": "^2.7.0",
+    "jasmine-core": "^2.7.0",
+    "karma": "^1.7.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-coverage": "^1.1.1",
+    "karma-firefox-launcher": "^1.0.1",
+    "karma-jasmine": "^1.1.0",
+    "karma-rollup-preprocessor": "^4.0.2",
+    "mocha": "^3.5.0",
+    "reflect-metadata": "^0.1.10",
+    "rollup": "^0.45.2",
+    "rollup-plugin-buble": "^0.15.0",
+    "rollup-plugin-commonjs": "^8.1.0",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-typescript": "^0.8.1",
+    "rxjs": "^5.4.2",
+    "ts-node": "^3.3.0",
+    "typescript": "^2.4.2",
+    "zone.js": "^0.8.16"
   }
 }

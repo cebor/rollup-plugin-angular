@@ -3,6 +3,9 @@
 # rollup-plugin-angular
 Angular2 template and styles inliner for rollup
 
+## Looking for new maintainer
+I have no time to maintain this plugin anymore. So im looking for a new Maintainer. Feel free to create an issue, when you want to maintain this plugin.
+
 ## Installation
 ```bash
 npm install --save-dev rollup-plugin-angular

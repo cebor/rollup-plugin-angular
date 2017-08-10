@@ -6,9 +6,10 @@ import { createFilter } from 'rollup-pluginutils';
 
 const moduleIdRegex = /moduleId\s*:(.*)/g;
 const componentRegex = /@Component\(\s?{([\s\S]*)}\s?\)$|type:\s?Component,\s?args:\s?\[\s?{([\s\S]*)},\s?\]/gm;
+const commentRegex = /\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*$/gm; // http://www.regextester.com/?fam=96247
 const templateUrlRegex = /templateUrl\s*:(.*)/g;
 const styleUrlsRegex = /styleUrls\s*:(\s*\[[\s\S]*?\])/g;
-const stringRegex = /(['"])((?:[^\\]\\\1|.)*?)\1/g;
+const stringRegex = /(['"`])((?:[^\\]\\\1|.)*?)\1/g;
 
 function insertText(str, dir, preprocessor = res => res, processFilename = false, sourceType = 'ts') {
   let quoteChar = sourceType === 'ts' ? '`' : '"';
@@ -36,6 +37,7 @@ export default function angular(options = {}) {
     name: 'angular',
     transform(source, map) {
       if (!filter(map)) return;
+      source = source.replace(commentRegex, '');
 
       const magicString = new MagicString(source);
       const dir = path.parse(map).dir;
@@ -61,15 +63,20 @@ export default function angular(options = {}) {
             hasReplacements = true;
             return '';
           });
-
-        if (hasReplacements) magicString.overwrite(start, end, replacement);
+        if (hasReplacements) {
+          magicString.overwrite(start, end, replacement);
+        }
       }
 
-      if (!hasReplacements) return null;
+      if (!hasReplacements) {
+        return null;
+      }
 
       let result = { code: magicString.toString() };
-      if (options.sourceMap !== false) result.map = magicString.generateMap({ hires: true });
 
+      if (options.sourceMap !== false) {
+        result.map = magicString.generateMap({ hires: true });
+      }
       return result;
     }
   };
