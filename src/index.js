@@ -5,21 +5,20 @@ import MagicString from 'magic-string';
 import { createFilter } from 'rollup-pluginutils';
 
 const moduleIdRegex = /moduleId\s*:(.*)/g;
-const componentRegex = /@Component\(\s?{([\s\S]*)}\s?\)$|type:\s?Component,\s?args:\s?\[\s?{([\s\S]*)},\s?\]/gm;
+const componentRegex = /@Component\(\s?{([\s\S]*)}\s?\)$/gm;
 const commentRegex = /\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*$/gm; // http://www.regextester.com/?fam=96247
 const templateUrlRegex = /templateUrl\s*:(.*)/g;
 const styleUrlsRegex = /styleUrls\s*:(\s*\[[\s\S]*?\])/g;
 const stringRegex = /(['"`])((?:[^\\]\\\1|.)*?)\1/g;
 
-function insertText(str, dir, preprocessor = res => res, processFilename = false, sourceType = 'ts') {
-  let quoteChar = sourceType === 'ts' ? '`' : '"';
+function insertText(str, dir, preprocessor = res => res, processFilename = false) {
   return str.replace(stringRegex, function (match, quote, url) {
     const includePath = path.join(dir, url);
     if (processFilename) {
-      return quoteChar + preprocessor(includePath) + quoteChar;
+      return '`' + preprocessor(includePath) + '`';
     }
     const text = fs.readFileSync(includePath).toString();
-    return quoteChar + preprocessor(text, includePath) + quoteChar;
+    return '`' + preprocessor(text, includePath) + '`';
   });
 }
 
@@ -53,11 +52,11 @@ export default function angular(options = {}) {
         replacement = match[0]
           .replace(templateUrlRegex, function (match, url) {
             hasReplacements = true;
-            return 'template:' + insertText(url, dir, options.preprocessors.template, options.processFilename, options.sourcetype);
+            return 'template:' + insertText(url, dir, options.preprocessors.template, options.processFilename);
           })
           .replace(styleUrlsRegex, function (match, urls) {
             hasReplacements = true;
-            return 'styles:' + insertText(urls, dir, options.preprocessors.style, options.processFilename, options.sourcetype);
+            return 'styles:' + insertText(urls, dir, options.preprocessors.style, options.processFilename);
           })
           .replace(moduleIdRegex, function (match, moduleId) {
             hasReplacements = true;
