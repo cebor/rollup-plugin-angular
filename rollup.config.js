@@ -1,6 +1,6 @@
 import buble from 'rollup-plugin-buble';
 
-var external = Object.keys(require('./package.json').dependencies).concat(['fs', 'path']);
+var external = Object.keys(require('./package.json').dependencies).concat(['colors', ,'fs', 'path', 'replace']);
 
 export default {
   entry: 'src/index.js',

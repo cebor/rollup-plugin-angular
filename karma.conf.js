@@ -1,8 +1,7 @@
 // Karma configuration
-// Generated on Mon Mar 20 2017 15:06:42 GMT+0100 (CET)
 
-const commonjs = require('rollup-plugin-commonjs');
 const angular = require('./dist/rollup-plugin-angular.js');
+const commonjs = require('rollup-plugin-commonjs');
 const nodeResolve = require('rollup-plugin-node-resolve');
 const typescript = require('rollup-plugin-typescript');
 
@@ -40,8 +39,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'test/karma/*.ts': ['rollup'],
-      // 'node_modules/@angular/core/@angular/core.es5.js': ['rollup'],
+      'test/karma/*.ts': ['rollup']
     },
 
 
@@ -49,7 +47,7 @@ module.exports = function(config) {
       context: 'this',
       // will help to prevent conflicts between different tests entries
       moduleName: 'examplemodule',
-      format: 'iife',
+      format: 'umd',
       sourceMap: 'inline',
       // rollup settings. See Rollup documentation
       plugins: [

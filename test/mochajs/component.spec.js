@@ -24,7 +24,24 @@ describe('rollup-plugin-angular', () => {
           .generate({ format: 'iife', moduleName: 'component' })
           .then(generated => {
             expect(generated.code.includes(`component.html content loaded`)).to.equal(false);
-            expect(generated.code.includes(`template:`)).to.equal(false);
+            assert.ok(generated.code);
+          });
+      });
+	});
+
+  it('should have example-component.html file content loaded', () => {
+    return rollup({
+        entry: 'mochajs/example-component.js',
+        external: external,
+        plugins: [
+          angular()
+        ]
+      })
+      .then(bundle => {
+        return bundle
+          .generate({ format: 'umd', moduleName: 'component' })
+          .then(generated => {
+            expect(generated.code.includes(`blaah`)).to.equal(true);
             assert.ok(generated.code);
           });
       });

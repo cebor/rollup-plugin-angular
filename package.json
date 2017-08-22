@@ -1,6 +1,6 @@
 {
   "name": "rollup-plugin-angular",
-  "version": "0.4.12",
+  "version": "0.5.0",
   "description": "Angular2 template and styles inliner",
   "main": "dist/rollup-plugin-angular.js",
   "module": "dist/rollup-plugin-angular.esm.js",
@@ -57,6 +57,7 @@
     "karma-rollup-preprocessor": "^4.0.2",
     "mocha": "^3.5.0",
     "reflect-metadata": "^0.1.10",
+    "replace": "^0.3.0",
     "rollup": "^0.45.2",
     "rollup-plugin-buble": "^0.15.0",
     "rollup-plugin-commonjs": "^8.1.0",
