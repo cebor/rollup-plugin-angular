@@ -1,6 +1,6 @@
 {
   "name": "rollup-plugin-angular",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "Angular2 template and styles inliner",
   "main": "dist/rollup-plugin-angular.js",
   "module": "dist/rollup-plugin-angular.esm.js",
@@ -30,7 +30,9 @@
   },
   "license": "MIT",
   "dependencies": {
+    "colors": "^1.1.2",
     "magic-string": "^0.22.4",
+    "replace": "^0.3.0",
     "rollup-pluginutils": "^2.0.1"
   },
   "devDependencies": {
@@ -47,7 +49,6 @@
     "babel-register": "^6.26.0",
     "chai": "^4.1.1",
     "clean-css": "^4.1.7",
-    "colors": "^1.1.2",
     "html-minifier": "^3.5.3",
     "jasmine": "^2.7.0",
     "jasmine-core": "^2.7.0",
@@ -60,7 +61,6 @@
     "mocha": "^3.5.0",
     "node-sass": "^4.5.3",
     "reflect-metadata": "^0.1.10",
-    "replace": "^0.3.0",
     "rollup": "^0.48.2",
     "rollup-plugin-buble": "^0.15.0",
     "rollup-plugin-commonjs": "^8.2.0",
