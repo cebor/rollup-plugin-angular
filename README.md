@@ -73,11 +73,16 @@ const htmlminOpts = {
 };
 
 export default {
-  entry: 'src/main.ts',
-  format: 'iife',
-  dest: 'dist/bundle.js',
+  input: 'src/main.ts',
+  output: {
+    format: 'umd',
+    file: 'dist/bundle.js'
+  },
   plugins: [
     angular({
+      // additional replace `templateUrl` and `stylesUrls` in every `.js` file
+      // default: true
+      replace: false, 
       preprocessors: {
         template: template => minifyHtml(template, htmlminOpts),
         style: scss => {

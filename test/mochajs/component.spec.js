@@ -4,6 +4,15 @@ const expect = require('chai').expect;
 const angular = require('../../dist/rollup-plugin-angular.js');
 const external = Object.keys(require('./../../package.json').dependencies).concat(['fs', 'path']);
 const colors = require('colors');
+const sass = require('node-sass');
+const cleanCSS = require('clean-css');
+const htmlMinifier = require('html-minifier');
+const cssmin = new cleanCSS();
+const htmlminOpts = {
+  caseSensitive: true,
+  collapseWhitespace: true,
+  removeComments: true
+};
 
 process.chdir('test');
 
@@ -13,15 +22,20 @@ describe('rollup-plugin-angular', () => {
   console.info(`-------------------`);
   it('should not have component.html file content loaded from comment', () => {
     return rollup({
-        entry: 'mochajs/component.js',
+      input: 'mochajs/component.js',
         external: external,
         plugins: [
-          angular()
+          angular({
+            replace: false
+          })
         ]
       })
       .then(bundle => {
         return bundle
-          .generate({ format: 'iife', moduleName: 'component' })
+          .generate({
+            format: 'umd',
+            name: 'component'
+          })
           .then(generated => {
             expect(generated.code.includes(`component.html content loaded`)).to.equal(false);
             assert.ok(generated.code);
@@ -31,15 +45,26 @@ describe('rollup-plugin-angular', () => {
 
   it('should have example-component.html file content loaded', () => {
     return rollup({
-        entry: 'mochajs/example-component.js',
+        input: 'mochajs/example-component.js',
         external: external,
         plugins: [
-          angular()
+          angular({
+            preprocessors: {
+              template: template => htmlMinifier.minify(template, htmlminOpts),
+              style: scss => {
+                const css = sass.renderSync({ data: scss }).css;
+                return cssmin.minify(css).styles;
+              },
+            }
+          })
         ]
       })
       .then(bundle => {
         return bundle
-          .generate({ format: 'umd', moduleName: 'component' })
+          .generate({
+            format: 'umd',
+            name: 'component'
+          })
           .then(generated => {
             expect(generated.code.includes(`blaah`)).to.equal(true);
             assert.ok(generated.code);
